@@ -1,0 +1,161 @@
+:root {
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  background: #f4f7fb;
+  color: #17202a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+.page {
+  width: min(1000px, 92%);
+  margin: 0 auto;
+  padding: 56px 0;
+}
+
+.hero {
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  font-weight: 800;
+  opacity: 0.6;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  margin: 8px 0;
+}
+
+.hero p {
+  font-size: 1.05rem;
+  opacity: 0.75;
+}
+
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 28px;
+
+  box-shadow:
+    0 14px 36px rgba(25, 40, 60, 0.09);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 700;
+}
+
+input,
+select {
+  width: 100%;
+
+  border: 1px solid #d0d8e2;
+  border-radius: 12px;
+
+  padding: 12px 14px;
+
+  font-size: 1rem;
+
+  background: white;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid #8db7ff;
+  outline-offset: 1px;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.error {
+  margin: 0;
+
+  padding: 12px 14px;
+
+  border-radius: 12px;
+
+  background: #fff1f1;
+  color: #a31f1f;
+}
+
+.primary {
+  border: 0;
+
+  border-radius: 12px;
+
+  padding: 14px 18px;
+
+  font-weight: 800;
+  font-size: 1rem;
+
+  cursor: pointer;
+
+  text-decoration: none;
+
+  display: inline-flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.primary:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.result-card {
+  text-align: center;
+  padding: 56px 28px;
+}
+
+.price {
+  font-size: clamp(2.4rem, 7vw, 5rem);
+
+  font-weight: 900;
+
+  margin: 24px 0 32px;
+}
+
+@media (max-width: 700px) {
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .full-width {
+    grid-column: auto;
+  }
+
+  .page {
+    padding: 32px 0;
+  }
+}

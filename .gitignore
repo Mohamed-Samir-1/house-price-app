@@ -1,0 +1,30 @@
+# Python
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Node
+node_modules/
+dist/
+
+# Environment files
+.env
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Raw dataset - DO NOT COMMIT
+house_prices.csv
+notebooks/data/*.csv
+notebooks/data/*.zip
+
+# OS
+.DS_Store
+Thumbs.db
