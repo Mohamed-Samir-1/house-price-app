@@ -1,5 +1,4 @@
 import { useEffect, useState, type FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
 
 import { predictPrice } from "../api/predictionClient";
 import type { PredictionRequest } from "../types/prediction";
@@ -17,12 +16,20 @@ const initialForm: PredictionRequest = {
 };
 
 export default function PredictionForm() {
-  const navigate = useNavigate();
+  const [form, setForm] =
+    useState<PredictionRequest>(initialForm);
 
-  const [form, setForm] = useState<PredictionRequest>(initialForm);
-  const [locations, setLocations] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [locations, setLocations] =
+    useState<string[]>([]);
+
+  const [loading, setLoading] =
+    useState(false);
+
+  const [error, setError] =
+    useState("");
+
+  const [predictedPrice, setPredictedPrice] =
+    useState<number | null>(null);
 
   useEffect(() => {
     fetch("/locations.json")
@@ -58,9 +65,13 @@ export default function PredictionForm() {
     }));
   }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(
+    event: FormEvent<HTMLFormElement>
+  ) {
     event.preventDefault();
+
     setError("");
+    setPredictedPrice(null);
 
     if (!form.location) {
       setError("Please select a location.");
@@ -77,8 +88,13 @@ export default function PredictionForm() {
       return;
     }
 
-    if (form.bathroom < 0 || form.balcony < 0) {
-      setError("Bathrooms and balconies cannot be negative.");
+    if (
+      form.bathroom < 0 ||
+      form.balcony < 0
+    ) {
+      setError(
+        "Bathrooms and balconies cannot be negative."
+      );
       return;
     }
 
@@ -87,11 +103,7 @@ export default function PredictionForm() {
     try {
       const result = await predictPrice(form);
 
-      navigate("/result", {
-        state: {
-          predictedPrice: result.predicted_price,
-        },
-      });
+      setPredictedPrice(result.predicted_price);
     } catch (err) {
       setError(
         err instanceof Error
@@ -104,171 +116,314 @@ export default function PredictionForm() {
   }
 
   return (
-    <form className="card form-grid" onSubmit={handleSubmit}>
-      <label>
-        Location
-
-        <select
-          value={form.location}
-          onChange={(e) => updateField("location", e.target.value)}
-          required
-        >
-          <option value="" disabled>
-            Select location
-          </option>
-
-          {locations.map((location) => (
-            <option key={location} value={location}>
-              {location}
-            </option>
-          ))}
-        </select>
-      </label>
-
-      <label>
-        Carpet Area (sqft)
-
-        <input
-          type="number"
-          min="1"
-          step="1"
-          value={form.carpet_area_sqft}
-          onChange={(e) =>
-            updateField("carpet_area_sqft", Number(e.target.value))
-          }
-          required
-        />
-      </label>
-
-      <label>
-        Floor
-
-        <input
-          type="number"
-          min="-1"
-          step="1"
-          value={form.floor_num}
-          onChange={(e) =>
-            updateField("floor_num", Number(e.target.value))
-          }
-          required
-        />
-      </label>
-
-      <label>
-        Bathrooms
-
-        <input
-          type="number"
-          min="0"
-          step="1"
-          value={form.bathroom}
-          onChange={(e) =>
-            updateField("bathroom", Number(e.target.value))
-          }
-          required
-        />
-      </label>
-
-      <label>
-        Balconies
-
-        <input
-          type="number"
-          min="0"
-          step="1"
-          value={form.balcony}
-          onChange={(e) =>
-            updateField("balcony", Number(e.target.value))
-          }
-          required
-        />
-      </label>
-
-      <label>
-        Furnishing
-
-        <select
-          value={form.furnishing}
-          onChange={(e) =>
-            updateField("furnishing", e.target.value)
-          }
-          required
-        >
-          <option value="Furnished">Furnished</option>
-          <option value="Semi-Furnished">Semi-Furnished</option>
-          <option value="Unfurnished">Unfurnished</option>
-        </select>
-      </label>
-
-      <label>
-        Transaction
-
-        <select
-          value={form.transaction}
-          onChange={(e) =>
-            updateField("transaction", e.target.value)
-          }
-          required
-        >
-          <option value="New Property">New Property</option>
-          <option value="Resale">Resale</option>
-        </select>
-      </label>
-
-      <label>
-        Ownership
-
-        <select
-          value={form.ownership}
-          onChange={(e) =>
-            updateField("ownership", e.target.value)
-          }
-          required
-        >
-          <option value="Freehold">Freehold</option>
-          <option value="Leasehold">Leasehold</option>
-          <option value="Co-operative Society">
-            Co-operative Society
-          </option>
-          <option value="Power of Attorney">
-            Power of Attorney
-          </option>
-        </select>
-      </label>
-
-      <label>
-        Facing
-
-        <select
-          value={form.facing}
-          onChange={(e) => updateField("facing", e.target.value)}
-          required
-        >
-          <option value="East">East</option>
-          <option value="West">West</option>
-          <option value="North">North</option>
-          <option value="South">South</option>
-          <option value="North-East">North-East</option>
-          <option value="North-West">North-West</option>
-          <option value="South-East">South-East</option>
-          <option value="South-West">South-West</option>
-        </select>
-      </label>
-
-      {error && (
-        <p className="error full-width">
-          {error}
-        </p>
-      )}
-
-      <button
-        className="primary full-width"
-        type="submit"
-        disabled={loading}
+    <>
+      <form
+        className="card form-grid"
+        onSubmit={handleSubmit}
       >
-        {loading ? "Predicting..." : "Predict House Price"}
-      </button>
-    </form>
+        <label>
+          <span className="field-label">
+            <span>Location</span>
+            <small>الموقع</small>
+          </span>
+
+          <select
+            value={form.location}
+            onChange={(e) =>
+              updateField(
+                "location",
+                e.target.value
+              )
+            }
+            required
+          >
+            <option value="" disabled>
+              Select location
+            </option>
+
+            {locations.map((location) => (
+              <option
+                key={location}
+                value={location}
+              >
+                {location}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label>
+          <span className="field-label">
+            <span>Carpet Area (sqft)</span>
+            <small>مساحة العقار بالقدم المربع</small>
+          </span>
+
+          <input
+            type="number"
+            min="1"
+            step="1"
+            value={form.carpet_area_sqft}
+            onChange={(e) =>
+              updateField(
+                "carpet_area_sqft",
+                Number(e.target.value)
+              )
+            }
+            required
+          />
+        </label>
+
+        <label>
+          <span className="field-label">
+            <span>Floor</span>
+            <small>الطابق</small>
+          </span>
+
+          <input
+            type="number"
+            min="-1"
+            step="1"
+            value={form.floor_num}
+            onChange={(e) =>
+              updateField(
+                "floor_num",
+                Number(e.target.value)
+              )
+            }
+            required
+          />
+        </label>
+
+        <label>
+          <span className="field-label">
+            <span>Bathrooms</span>
+            <small>عدد الحمامات</small>
+          </span>
+
+          <input
+            type="number"
+            min="0"
+            step="1"
+            value={form.bathroom}
+            onChange={(e) =>
+              updateField(
+                "bathroom",
+                Number(e.target.value)
+              )
+            }
+            required
+          />
+        </label>
+
+        <label>
+          <span className="field-label">
+            <span>Balconies</span>
+            <small>عدد الشرفات</small>
+          </span>
+
+          <input
+            type="number"
+            min="0"
+            step="1"
+            value={form.balcony}
+            onChange={(e) =>
+              updateField(
+                "balcony",
+                Number(e.target.value)
+              )
+            }
+            required
+          />
+        </label>
+
+        <label>
+          <span className="field-label">
+            <span>Furnishing</span>
+            <small>حالة الفرش</small>
+          </span>
+
+          <select
+            value={form.furnishing}
+            onChange={(e) =>
+              updateField(
+                "furnishing",
+                e.target.value
+              )
+            }
+            required
+          >
+            <option value="Furnished">
+              Furnished
+            </option>
+
+            <option value="Semi-Furnished">
+              Semi-Furnished
+            </option>
+
+            <option value="Unfurnished">
+              Unfurnished
+            </option>
+          </select>
+        </label>
+
+        <label>
+          <span className="field-label">
+            <span>Transaction</span>
+            <small>نوع المعاملة</small>
+          </span>
+
+          <select
+            value={form.transaction}
+            onChange={(e) =>
+              updateField(
+                "transaction",
+                e.target.value
+              )
+            }
+            required
+          >
+            <option value="New Property">
+              New Property
+            </option>
+
+            <option value="Resale">
+              Resale
+            </option>
+          </select>
+        </label>
+
+        <label>
+          <span className="field-label">
+            <span>Ownership</span>
+            <small>نوع الملكية</small>
+          </span>
+
+          <select
+            value={form.ownership}
+            onChange={(e) =>
+              updateField(
+                "ownership",
+                e.target.value
+              )
+            }
+            required
+          >
+            <option value="Freehold">
+              Freehold
+            </option>
+
+            <option value="Leasehold">
+              Leasehold
+            </option>
+
+            <option value="Co-operative Society">
+              Co-operative Society
+            </option>
+
+            <option value="Power of Attorney">
+              Power of Attorney
+            </option>
+          </select>
+        </label>
+
+        <label>
+          <span className="field-label">
+            <span>Facing</span>
+            <small>اتجاه العقار</small>
+          </span>
+
+          <select
+            value={form.facing}
+            onChange={(e) =>
+              updateField(
+                "facing",
+                e.target.value
+              )
+            }
+            required
+          >
+            <option value="East">East</option>
+            <option value="West">West</option>
+            <option value="North">North</option>
+            <option value="South">South</option>
+            <option value="North-East">
+              North-East
+            </option>
+            <option value="North-West">
+              North-West
+            </option>
+            <option value="South-East">
+              South-East
+            </option>
+            <option value="South-West">
+              South-West
+            </option>
+          </select>
+        </label>
+
+        {error && (
+          <p className="error full-width">
+            {error}
+          </p>
+        )}
+
+        <button
+          className="primary full-width"
+          type="submit"
+          disabled={loading}
+        >
+          {loading
+            ? "Predicting..."
+            : "Predict House Price"}
+        </button>
+      </form>
+
+      {predictedPrice !== null && (
+        <section className="card prediction-result">
+          <p className="result-eyebrow">
+            PREDICTION RESULT
+          </p>
+
+          <div className="result-check">
+            ✓
+          </div>
+
+          <h2>Estimated House Price</h2>
+
+          <p className="result-description">
+            Based on the property details you
+            provided, our machine learning model
+            estimates the following price.
+          </p>
+
+          <p className="price-label">
+            ESTIMATED VALUE
+          </p>
+
+          <div
+            className="prediction-price"
+            dir="ltr"
+          >
+            <span className="currency-symbol">
+              ₹
+            </span>
+
+            <span className="price-number">
+              {predictedPrice.toLocaleString(
+                "en-IN",
+                {
+                  maximumFractionDigits: 0,
+                }
+              )}
+            </span>
+          </div>
+
+          <p className="result-note">
+            This is an estimated market value
+            generated by the ML model.
+          </p>
+        </section>
+      )}
+    </>
   );
 }
