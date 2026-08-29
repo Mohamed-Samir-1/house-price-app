@@ -86,6 +86,7 @@ button {
 .hero-topline {
   display: inline-flex;
   align-items: center;
+
   gap: 10px;
 
   margin-bottom: 15px;
@@ -116,6 +117,7 @@ button {
 .eyebrow {
   display: inline-flex;
   align-items: center;
+
   gap: 10px;
 
   margin: 0 0 13px;
@@ -123,7 +125,6 @@ button {
   color: #5b5fe8;
 
   font-size: 0.7rem;
-
   font-weight: 900;
 
   letter-spacing: 0.17em;
@@ -138,11 +139,12 @@ button {
 
   border-radius: 999px;
 
-  background: linear-gradient(
-    90deg,
-    #5b5ce2,
-    #38bdf8
-  );
+  background:
+    linear-gradient(
+      90deg,
+      #5b5ce2,
+      #38bdf8
+    );
 }
 
 .hero h1 {
@@ -150,7 +152,12 @@ button {
 
   color: #0f172a;
 
-  font-size: clamp(2.7rem, 5.4vw, 4.55rem);
+  font-size:
+    clamp(
+      2.7rem,
+      5.4vw,
+      4.55rem
+    );
 
   line-height: 0.98;
 
@@ -175,8 +182,13 @@ button {
   line-height: 1.8 !important;
 }
 
+/* ================================
+   META
+================================ */
+
 .hero-meta {
   display: flex;
+
   align-items: center;
 
   gap: 20px;
@@ -186,6 +198,7 @@ button {
 
 .meta-item {
   display: flex;
+
   align-items: center;
 
   gap: 10px;
@@ -196,7 +209,9 @@ button {
   height: 38px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
   border: 1px solid #e5e7eb;
@@ -208,6 +223,7 @@ button {
   color: #5b5ce2;
 
   font-size: 0.76rem;
+
   font-weight: 900;
 
   box-shadow:
@@ -220,6 +236,7 @@ button {
   color: #344054;
 
   font-size: 0.76rem;
+
   font-weight: 850;
 }
 
@@ -231,11 +248,13 @@ button {
   color: #98a2b3;
 
   font-size: 0.66rem;
+
   font-weight: 650;
 }
 
 .meta-divider {
   width: 1px;
+
   height: 32px;
 
   background: #e6e9ef;
@@ -247,7 +266,9 @@ button {
 
 .prediction-header {
   display: flex;
+
   align-items: flex-end;
+
   justify-content: space-between;
 
   margin-bottom: 15px;
@@ -261,6 +282,7 @@ button {
   color: #7a8493;
 
   font-size: 0.67rem;
+
   font-weight: 900;
 
   letter-spacing: 0.14em;
@@ -288,6 +310,7 @@ button {
 
 .india-badge {
   display: inline-flex;
+
   align-items: center;
 
   padding: 8px 13px;
@@ -301,6 +324,7 @@ button {
   color: #475467;
 
   font-size: 0.73rem;
+
   font-weight: 850;
 
   box-shadow:
@@ -375,18 +399,23 @@ button {
 
 .form-grid {
   position: relative;
+
   z-index: 1;
 
   display: grid;
 
   grid-template-columns:
-    repeat(2, minmax(0, 1fr));
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
 
   gap: 21px 20px;
 }
 
 label {
   display: flex;
+
   flex-direction: column;
 
   gap: 9px;
@@ -401,7 +430,7 @@ label {
 }
 
 /* ================================
-   BILINGUAL LABELS
+   BILINGUAL LABEL
 ================================ */
 
 .field-label {
@@ -472,8 +501,10 @@ select:focus {
   background: #ffffff;
 
   box-shadow:
-    0 0 0 4px rgba(99, 102, 241, 0.09),
-    0 5px 16px rgba(99, 102, 241, 0.045);
+    0 0 0 4px
+      rgba(99, 102, 241, 0.09),
+    0 5px 16px
+      rgba(99, 102, 241, 0.045);
 }
 
 input::placeholder {
@@ -522,7 +553,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /* ================================
-   BUTTON
+   PRIMARY BUTTON
 ================================ */
 
 .primary {
@@ -553,11 +584,14 @@ input[type="number"]::-webkit-outer-spin-button {
     );
 
   box-shadow:
-    0 12px 24px rgba(79, 70, 229, 0.19);
+    0 12px 24px
+      rgba(79, 70, 229, 0.19);
 
   font-size: 0.93rem;
 
   font-weight: 900;
+
+  letter-spacing: -0.01em;
 
   cursor: pointer;
 
@@ -573,7 +607,8 @@ input[type="number"]::-webkit-outer-spin-button {
   transform: translateY(-2px);
 
   box-shadow:
-    0 17px 31px rgba(79, 70, 229, 0.25);
+    0 17px 31px
+      rgba(79, 70, 229, 0.25);
 
   filter: brightness(1.025);
 }
@@ -583,7 +618,8 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .primary:focus-visible {
-  outline: 3px solid rgba(99, 102, 241, 0.2);
+  outline: 3px solid
+    rgba(99, 102, 241, 0.2);
 
   outline-offset: 3px;
 }
@@ -599,7 +635,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /* ================================
-   INLINE RESULT
+   PREDICTION RESULT
 ================================ */
 
 .prediction-result {
@@ -624,18 +660,27 @@ input[type="number"]::-webkit-outer-spin-button {
     #ffffff;
 
   box-shadow:
-    0 25px 65px rgba(15, 23, 42, 0.075),
-    0 7px 20px rgba(15, 23, 42, 0.04);
+    0 25px 65px
+      rgba(15, 23, 42, 0.075),
+    0 7px 20px
+      rgba(15, 23, 42, 0.04);
 }
 
 .prediction-result::after {
   width: 340px;
+
   height: 340px;
 
   top: -220px;
+
   right: -130px;
 
-  background: rgba(99, 102, 241, 0.04);
+  background: rgba(
+    99,
+    102,
+    241,
+    0.04
+  );
 }
 
 .result-eyebrow {
@@ -660,6 +705,7 @@ input[type="number"]::-webkit-outer-spin-button {
   z-index: 2;
 
   width: 44px;
+
   height: 44px;
 
   margin: 14px auto 17px;
@@ -667,6 +713,7 @@ input[type="number"]::-webkit-outer-spin-button {
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   border: 1px solid #c7d2fe;
@@ -682,7 +729,8 @@ input[type="number"]::-webkit-outer-spin-button {
   font-weight: 950;
 
   box-shadow:
-    0 9px 20px rgba(99, 102, 241, 0.1);
+    0 9px 20px
+      rgba(99, 102, 241, 0.1);
 }
 
 .prediction-result h2 {
@@ -694,7 +742,12 @@ input[type="number"]::-webkit-outer-spin-button {
 
   color: #101828;
 
-  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-size:
+    clamp(
+      2rem,
+      4vw,
+      2.8rem
+    );
 
   line-height: 1.08;
 
@@ -736,7 +789,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /* ================================
-   PRICE - CENTERED + CLEAR
+   PRICE
 ================================ */
 
 .prediction-price {
@@ -769,13 +822,18 @@ input[type="number"]::-webkit-outer-spin-button {
   background:
     linear-gradient(
       180deg,
-      #fafbff 0%,
+      #f9faff 0%,
       #f1f4ff 100%
     );
 
   color: #0f172a;
 
-  font-size: clamp(2.8rem, 6.5vw, 4.8rem);
+  font-size:
+    clamp(
+      2.8rem,
+      6.5vw,
+      4.8rem
+    );
 
   line-height: 1;
 
@@ -790,7 +848,8 @@ input[type="number"]::-webkit-outer-spin-button {
   font-variant-numeric: tabular-nums;
 
   box-shadow:
-    0 15px 34px rgba(79, 70, 229, 0.1);
+    0 15px 34px
+      rgba(79, 70, 229, 0.1);
 }
 
 .currency-symbol {
@@ -823,6 +882,10 @@ input[type="number"]::-webkit-outer-spin-button {
   letter-spacing: -0.035em;
 }
 
+/* ================================
+   RESULT NOTE
+================================ */
+
 .result-note {
   position: relative;
 
@@ -835,6 +898,51 @@ input[type="number"]::-webkit-outer-spin-button {
   font-size: 0.78rem;
 
   line-height: 1.6;
+}
+
+/* ================================
+   NEW PREDICTION
+================================ */
+
+.secondary-action {
+  position: relative;
+
+  z-index: 2;
+
+  margin-top: 22px;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #5b5ce2;
+
+  font-size: 0.86rem;
+
+  font-weight: 850;
+
+  cursor: pointer;
+
+  transition:
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.secondary-action:hover {
+  color: #4338ca;
+
+  transform: translateY(-1px);
+}
+
+.secondary-action:focus-visible {
+  outline: 3px solid
+    rgba(99, 102, 241, 0.18);
+
+  outline-offset: 4px;
+
+  border-radius: 6px;
 }
 
 /* ================================
@@ -856,16 +964,19 @@ input[type="number"]::-webkit-outer-spin-button {
 
   border-radius: 15px;
 
-  background: rgba(255, 255, 255, 0.75);
+  background:
+    rgba(255, 255, 255, 0.75);
 
   box-shadow:
-    0 8px 22px rgba(16, 24, 40, 0.025);
+    0 8px 22px
+      rgba(16, 24, 40, 0.025);
 }
 
 .info-strip-icon {
   flex: 0 0 auto;
 
   width: 28px;
+
   height: 28px;
 
   display: flex;
@@ -906,18 +1017,27 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /* ================================
-   RESPONSIVE
+   TABLET
 ================================ */
 
 @media (max-width: 850px) {
   .page {
-    width: min(100% - 32px, 730px);
+    width:
+      min(
+        100% - 32px,
+        730px
+      );
 
     padding: 50px 0 65px;
   }
 
   .hero h1 {
-    font-size: clamp(2.45rem, 8vw, 3.75rem);
+    font-size:
+      clamp(
+        2.45rem,
+        8vw,
+        3.75rem
+      );
   }
 
   .card {
@@ -935,6 +1055,10 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 
+/* ================================
+   MOBILE
+================================ */
+
 @media (max-width: 700px) {
   .page {
     width: calc(100% - 20px);
@@ -951,7 +1075,12 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 
   .hero h1 {
-    font-size: clamp(2.1rem, 11vw, 3rem);
+    font-size:
+      clamp(
+        2.1rem,
+        11vw,
+        3rem
+      );
 
     line-height: 1.02;
   }
@@ -966,7 +1095,10 @@ input[type="number"]::-webkit-outer-spin-button {
     display: grid;
 
     grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
 
     gap: 14px;
   }
@@ -1001,6 +1133,10 @@ input[type="number"]::-webkit-outer-spin-button {
     gap: 17px;
   }
 
+  label {
+    font-size: 0.82rem;
+  }
+
   .field-label {
     gap: 5px;
   }
@@ -1033,13 +1169,32 @@ input[type="number"]::-webkit-outer-spin-button {
 
     gap: 5px;
 
-    font-size: clamp(2.2rem, 10.5vw, 3.6rem);
+    font-size:
+      clamp(
+        2.2rem,
+        10.5vw,
+        3.6rem
+      );
   }
 
   .result-note {
     font-size: 0.72rem;
   }
+
+  .secondary-action {
+    margin-top: 20px;
+
+    font-size: 0.82rem;
+  }
+
+  .info-strip {
+    padding: 15px;
+  }
 }
+
+/* ================================
+   SMALL PHONES
+================================ */
 
 @media (max-width: 390px) {
   .page {
@@ -1083,7 +1238,12 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 
+/* ================================
+   SELECTION
+================================ */
+
 ::selection {
   color: #ffffff;
+
   background: #6366f1;
 }

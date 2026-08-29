@@ -115,12 +115,41 @@ export default function PredictionForm() {
     }
   }
 
+  function handleNewPrediction() {
+    setPredictedPrice(null);
+    setError("");
+
+    setForm({
+      location:
+        locations.length > 0
+          ? locations[0]
+          : "",
+
+      carpet_area_sqft: 0,
+      floor_num: 0,
+      bathroom: 0,
+      balcony: 0,
+
+      furnishing: "Unfurnished",
+      transaction: "Resale",
+      ownership: "Freehold",
+      facing: "East",
+    });
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
   return (
     <>
       <form
         className="card form-grid"
         onSubmit={handleSubmit}
       >
+        {/* LOCATION */}
+
         <label>
           <span className="field-label">
             <span>Location</span>
@@ -152,26 +181,38 @@ export default function PredictionForm() {
           </select>
         </label>
 
+        {/* CARPET AREA */}
+
         <label>
           <span className="field-label">
             <span>Carpet Area (sqft)</span>
-            <small>مساحة العقار بالقدم المربع</small>
+            <small>
+              مساحة العقار بالقدم المربع
+            </small>
           </span>
 
           <input
             type="number"
             min="1"
             step="1"
-            value={form.carpet_area_sqft}
+            value={
+              form.carpet_area_sqft === 0
+                ? ""
+                : form.carpet_area_sqft
+            }
             onChange={(e) =>
               updateField(
                 "carpet_area_sqft",
-                Number(e.target.value)
+                e.target.value === ""
+                  ? 0
+                  : Number(e.target.value)
               )
             }
             required
           />
         </label>
+
+        {/* FLOOR */}
 
         <label>
           <span className="field-label">
@@ -183,16 +224,24 @@ export default function PredictionForm() {
             type="number"
             min="-1"
             step="1"
-            value={form.floor_num}
+            value={
+              form.floor_num === 0
+                ? ""
+                : form.floor_num
+            }
             onChange={(e) =>
               updateField(
                 "floor_num",
-                Number(e.target.value)
+                e.target.value === ""
+                  ? 0
+                  : Number(e.target.value)
               )
             }
             required
           />
         </label>
+
+        {/* BATHROOMS */}
 
         <label>
           <span className="field-label">
@@ -204,16 +253,24 @@ export default function PredictionForm() {
             type="number"
             min="0"
             step="1"
-            value={form.bathroom}
+            value={
+              form.bathroom === 0
+                ? ""
+                : form.bathroom
+            }
             onChange={(e) =>
               updateField(
                 "bathroom",
-                Number(e.target.value)
+                e.target.value === ""
+                  ? 0
+                  : Number(e.target.value)
               )
             }
             required
           />
         </label>
+
+        {/* BALCONIES */}
 
         <label>
           <span className="field-label">
@@ -225,16 +282,24 @@ export default function PredictionForm() {
             type="number"
             min="0"
             step="1"
-            value={form.balcony}
+            value={
+              form.balcony === 0
+                ? ""
+                : form.balcony
+            }
             onChange={(e) =>
               updateField(
                 "balcony",
-                Number(e.target.value)
+                e.target.value === ""
+                  ? 0
+                  : Number(e.target.value)
               )
             }
             required
           />
         </label>
+
+        {/* FURNISHING */}
 
         <label>
           <span className="field-label">
@@ -266,6 +331,8 @@ export default function PredictionForm() {
           </select>
         </label>
 
+        {/* TRANSACTION */}
+
         <label>
           <span className="field-label">
             <span>Transaction</span>
@@ -291,6 +358,8 @@ export default function PredictionForm() {
             </option>
           </select>
         </label>
+
+        {/* OWNERSHIP */}
 
         <label>
           <span className="field-label">
@@ -326,6 +395,8 @@ export default function PredictionForm() {
           </select>
         </label>
 
+        {/* FACING */}
+
         <label>
           <span className="field-label">
             <span>Facing</span>
@@ -342,30 +413,49 @@ export default function PredictionForm() {
             }
             required
           >
-            <option value="East">East</option>
-            <option value="West">West</option>
-            <option value="North">North</option>
-            <option value="South">South</option>
+            <option value="East">
+              East
+            </option>
+
+            <option value="West">
+              West
+            </option>
+
+            <option value="North">
+              North
+            </option>
+
+            <option value="South">
+              South
+            </option>
+
             <option value="North-East">
               North-East
             </option>
+
             <option value="North-West">
               North-West
             </option>
+
             <option value="South-East">
               South-East
             </option>
+
             <option value="South-West">
               South-West
             </option>
           </select>
         </label>
 
+        {/* ERROR */}
+
         {error && (
           <p className="error full-width">
             {error}
           </p>
         )}
+
+        {/* SUBMIT */}
 
         <button
           className="primary full-width"
@@ -378,6 +468,8 @@ export default function PredictionForm() {
         </button>
       </form>
 
+      {/* PREDICTION RESULT */}
+
       {predictedPrice !== null && (
         <section className="card prediction-result">
           <p className="result-eyebrow">
@@ -388,7 +480,9 @@ export default function PredictionForm() {
             ✓
           </div>
 
-          <h2>Estimated House Price</h2>
+          <h2>
+            Estimated House Price
+          </h2>
 
           <p className="result-description">
             Based on the property details you
@@ -422,6 +516,14 @@ export default function PredictionForm() {
             This is an estimated market value
             generated by the ML model.
           </p>
+
+          <button
+            type="button"
+            className="secondary-action"
+            onClick={handleNewPrediction}
+          >
+            Predict Another Property
+          </button>
         </section>
       )}
     </>
